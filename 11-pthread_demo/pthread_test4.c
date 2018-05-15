@@ -146,7 +146,7 @@ void *thread1(void *arg)
         pthread_mutex_lock(&mutex);
         pthread_cond_wait(&cond, &mutex);
         printf("thread1 applied the conition\n");
-        pthread_mutex_unlock(&mutex);
+        //pthread_mutex_unlock(&mutex);
         */
         pthread_cond_signal(&cond);
         sleep(1);
@@ -164,19 +164,33 @@ void *thread2(void *arg)
         pthread_cond_wait(&cond, &mutex);
         printf("thread2 applied the condition\n");
         pthread_mutex_unlock(&mutex);
+        //sleep(1);
+    }
+}
+
+void *thread3(void *arg)
+{
+    while(1)
+    {
+        printf("thread3 is running\n");
+        pthread_mutex_lock(&mutex);
+        pthread_cond_wait(&cond, &mutex);
+        printf("thread3 applied the condition\n");
+        pthread_mutex_unlock(&mutex);
         //sleep(2);
     }
 }
 
 int main()
 {
-    pthread_t thid1, thid2;
-    printf("conition variaable study!\n");
+    pthread_t thid1, thid2, thid3;
+    printf("conition variable study!\n");
     
     pthread_mutex_init(&mutex, NULL);
     pthread_cond_init(&cond, NULL);
     pthread_create(&thid1, NULL, thread1, NULL);
     pthread_create(&thid2, NULL, thread2, NULL);
+    pthread_create(&thid3, NULL, thread3, NULL);
     /*
     sleep(1);
     do
