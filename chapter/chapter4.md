@@ -18,20 +18,20 @@ int fstatat(int fd, const char *restrict pathname, struct stat *restrict buf, in
 											所有4个函数的返回值：若成功，返回0；若出错，返回-1
 ```
 
-* stat函数给出pathname，将返回与此命名有关的信息结构。
++ stat函数给出pathname，将返回与此命名有关的信息结构。
 
-* fstat函数获得已在描述符fd上打开文件的有关信息。
++ fstat函数获得已在描述符fd上打开文件的有关信息。
 
-* lstat函数类似于stat，但是当命名的文件是一个符号链接时，返回该符号链接的有关信息，而不是由该符号链接引用的文件的信息。
++ lstat函数类似于stat，但是当命名的文件是一个符号链接时，返回该符号链接的有关信息，而不是由该符号链接引用的文件的信息。
 
-* fstatat函数为一个相对于当前打开目录（由fd参数指向）的路径名返回文件统计信息。
++ fstatat函数为一个相对于当前打开目录（由fd参数指向）的路径名返回文件统计信息。
 
-    * flag参数控制着是否跟随着一个符号链接:
-       * 1.当AT_SYMLINK_NOFOLLOW标志被设置时，fstatat不会跟随符号链接，而是返回符号链接本身的信息;
-       * 2.在默认情况下，返回的是符号链接所指向的实际文件的信息;
-    * fd参数的值
-       * 1.是AT_FDCWD，并且pathname参数是一个相对路径名， fstatat会计算相对于当前目录的pathname参数;
-       * 2.如果pathname是一个绝对路径，fd参数就会被忽略;
+    + flag参数控制着是否跟随着一个符号链接:
+       + 1.当AT_SYMLINK_NOFOLLOW标志被设置时，fstatat不会跟随符号链接，而是返回符号链接本身的信息;
+       + 2.在默认情况下，返回的是符号链接所指向的实际文件的信息;
+    + fd参数的值
+       + 1.是AT_FDCWD，并且pathname参数是一个相对路径名， fstatat会计算相对于当前目录的pathname参数;
+       + 2.如果pathname是一个绝对路径，fd参数就会被忽略;
     这两种情况下，根据flag的取值，fstatat的作用就跟stat或lstat一样
 
 ## 4.3 文件类型
